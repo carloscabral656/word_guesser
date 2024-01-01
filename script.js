@@ -2,8 +2,11 @@ const word = "test";
 const input = [];
 
 document.addEventListener("keydown", (e) => {
-    input.push(e.key);
-    updateInputDisplay();
+    let reg = new RegExp('^[a-zA-Z]+$');
+    if(reg.test(e.key)){
+        input.push(e.key.toUpperCase());
+        updateInputDisplay();
+    }
 });
 
 function updateInputDisplay(){
