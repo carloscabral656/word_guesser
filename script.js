@@ -1,4 +1,4 @@
-const word = "test";
+const word = "TESTE".toUpperCase(); // Always tranform the string
 const input = [];
 const btnTry = document.getElementById("button_try");
 btnTry.addEventListener("keydown", handleBtnTry); // Handle keydown
@@ -13,7 +13,7 @@ const clickEvent = new KeyboardEvent("keydown", {
 document.addEventListener("keydown", (e) => {
     if(e.key.length > 1) return;
     let reg = new RegExp('^[a-zA-Z]+$');
-    if(reg.test(e.key)){
+    if(reg.test(e.key) && input.length < word.length){
         input.push(e.key.toUpperCase());
         updateInputDisplay();
     }
@@ -22,7 +22,10 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("keydown", (e) => {
     if(e.key === "Enter"){
         btnTry.dispatchEvent(clickEvent); 
-        verifyAnswer();
+        if(input.length === word.length){
+            let correct = isAnswerCorrect();
+            alert(correct);
+        }
     }
 });
 
@@ -48,7 +51,6 @@ function updateInputDisplay(){
 }
 
 function handleBtnTry(){
-    alert("Enter");
     btnTry.dispatchEvent(clickEvent);
 }
 
@@ -62,7 +64,10 @@ function createLetterHtml(){
     }
 }
 
-function verifyAnswer(){
-
+function isAnswerCorrect(){
+    let aux = 0;
+    for(let i = 0; i < input.length ; i++) if(input[i] === word[i]) aux++;
+    if(aux === input.length) return true;
+    return false;
 }
 
