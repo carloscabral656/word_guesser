@@ -4,6 +4,8 @@ const btnTry = document.getElementById("button_try");
 btnTry.addEventListener("keydown", handleBtnTry); // Handle keydown
 createLetterHtml();
 
+const lettersHtml = [...document.getElementsByClassName("letter")];
+
 const clickEvent = new KeyboardEvent("keydown", {
     bubbles: true,
     cancelable: true,
@@ -23,8 +25,8 @@ document.addEventListener("keydown", (e) => {
     if(e.key === "Enter"){
         btnTry.dispatchEvent(clickEvent); 
         if(input.length === word.length){
+            emendAnswer();
             let correct = isAnswerCorrect();
-            alert(correct);
         }
     }
 });
@@ -41,7 +43,6 @@ function updateInputDisplay(){
     const inputDisplay = [...document.getElementsByClassName('letter')];
     let index = 0;
     inputDisplay.forEach(e => {
-        console.log(input)
         if(input[index] !== undefined){
             e.innerText = input[index++];
         } else {
@@ -69,5 +70,19 @@ function isAnswerCorrect(){
     for(let i = 0; i < input.length ; i++) if(input[i] === word[i]) aux++;
     if(aux === input.length) return true;
     return false;
+}
+
+function emendAnswer(){
+    let index = 0;
+    lettersHtml.forEach(letterHtml => {
+        letterHtml.classList.remove("correct_letter");
+        letterHtml.classList.remove("wrong_letter");
+        if(letterHtml.innerText === word[index]){
+            letterHtml.classList.toggle("correct_letter");
+        }else{
+            letterHtml.classList.toggle("wrong_letter");
+        }
+        index++;
+    });
 }
 

@@ -24,6 +24,19 @@ body {
     text-align: center;
     border: solid 1px black;
     border-radius: 10px;
+    box-shadow: 5px 5px rgba(116, 116, 116);
+}
+
+.correct_letter {
+    border: solid 1px #1d4003;
+    background-color: #58CC02;
+    box-shadow: 5px 5px #2d6304;
+}
+
+.wrong_letter {
+    border: solid 1px #431616;
+    background-color: #FF4B4B;
+    box-shadow: 5px 5px #932727;
 }
 
 .try {
