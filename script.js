@@ -1,5 +1,5 @@
 const word = "TESTE".toUpperCase(); // Always tranform the string
-const input = [];
+let input = [];
 const btnTry = document.getElementById("button_try");
 btnTry.addEventListener("keydown", handleBtnTry); // Handle keydown
 createLetterHtml();
@@ -27,6 +27,10 @@ document.addEventListener("keydown", (e) => {
         if(input.length === word.length){
             emendAnswer();
             let correct = isAnswerCorrect();
+            if(!correct){
+                input = [];
+                updateInputDisplay();
+            }
         }
     }
 });
@@ -83,6 +87,13 @@ function emendAnswer(){
             letterHtml.classList.toggle("wrong_letter");
         }
         index++;
+    });
+}
+
+function resetLetters(){
+    lettersHtml.forEach(letterHtml => {
+        letterHtml.classList.remove("correct_letter");
+        letterHtml.classList.remove("wrong_letter");
     });
 }
 
