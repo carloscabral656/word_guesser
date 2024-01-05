@@ -42,6 +42,17 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+btnTry.addEventListener("click", () => {
+    if(input.length === word.length){
+        emendAnswer();
+        let correct = isAnswerCorrect();
+        if(!correct){
+            input = [];
+            updateInputDisplay();
+        }
+    }
+});
+
 
 function updateInputDisplay(){
     const inputDisplay = [...document.getElementsByClassName('letter')];
